@@ -1,4 +1,4 @@
-from datetime import datetime
+from time import time
 
 from sqlalchemy import Column, DateTime, Integer, String
 from sqlalchemy.orm import relationship
@@ -11,5 +11,5 @@ class Author(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True, nullable=False)
-    created_at = Column(DateTime, default=datetime.now(), nullable=False)
+    created_at = Column(DateTime, default=time(), nullable=False)
     stories = relationship("Story", back_populates="author")
