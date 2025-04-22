@@ -35,9 +35,16 @@ coming soon!
 
 ---
 
-## 🔧 Environment Variables
+## 🧪 Local Development
 
-```env
+### 1. Clone the repo
+```bash
+git clone https://github.com/Mustapha-Innocer/storage-service.git
+cd storage-service
+```
+
+### 2. Create `.env` file with the appropriate values
+```ini
 # Kafka
 KAFKA_SERVER=localhost
 KAFKA_PORT=9094
@@ -46,34 +53,23 @@ KAFKA_PORT=9094
 DB_URL=DB_URL=postgresql://username:password@host:port/dbname
 ```
 
----
-
-## 🚀 Getting Started
-
-1. Clone the repo
-
-2. Create and populate your `.env` file
-
-3. Create new python virtual environment
-
+### 3. Create new python virtual environment
 ```bash
 python -m venv venv
 ```
 
-4. Intall the python dependencies
-
+### 4. Intall the python dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-5. Run migrations
+### 5. Run migrations
 
 ```bash
 alembic upgrade head
 ```
 
-6. Run
-
+### 6. Run
 ```bash
 python main.py
 ```
