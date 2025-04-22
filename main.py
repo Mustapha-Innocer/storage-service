@@ -1,8 +1,11 @@
 import asyncio
 import json
+import traceback
 
+from lib.db.session import get_db
 from lib.kafka.consumer import consumer
 from lib.logging.logger import LOGGER
+from lib.service import save
 
 
 async def heartbeat():
@@ -13,6 +16,7 @@ async def heartbeat():
 
 async def consume():
     consumer.subscribe(["processed-data"])
+    db = next(get_db())
     while True:
         try:
             msg = consumer.poll(5)
@@ -28,10 +32,11 @@ async def consume():
 
             data = json.loads(msg.value().decode("utf-8"))
             LOGGER.info(f"Received new strory: {data["url"]}")
-            # TODO: Process the data
-            # consumer.commit()
-        except Exception as e:
-            LOGGER.error(f"Unable to process {data["url"]}: {e}")
+            save(db, data)
+            consumer.commit()
+        except Exception:
+            LOGGER.error(f"Unable to save {data["url"]}")
+            traceback.print_exc()
             await asyncio.sleep(30)
 
 
