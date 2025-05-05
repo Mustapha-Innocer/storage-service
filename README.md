@@ -48,6 +48,7 @@ cd storage-service
 # Kafka
 KAFKA_SERVER=localhost
 KAFKA_PORT=9094
+KAFKA_CONSUMER_TOPIC=processed-data
 
 # PostgreSQL
 DB_URL=DB_URL=postgresql://username:password@host:port/dbname

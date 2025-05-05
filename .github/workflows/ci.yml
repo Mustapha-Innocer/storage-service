@@ -2,17 +2,13 @@ name: ci-pipeline
 
 on:
   push:
-    branches: ["main", "dev"]
+    branches: ["main"]
   pull_request:
     branches: ["main", "dev"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      KAFKA_SERVER: ${{vars.KAFKA_SERVER}}
-      KAFKA_PORT: ${{vars.KAFKA_PORT}}
-      DB_URL: ${{vars.DB_URL}}
     strategy:
       fail-fast: false
       matrix:

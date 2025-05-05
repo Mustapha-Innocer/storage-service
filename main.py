@@ -6,6 +6,7 @@ from lib.db.session import get_db
 from lib.kafka.consumer import consumer
 from lib.logging.logger import LOGGER
 from lib.service import save
+from lib.config.config import KAFKA_CONSUMER_TOPIC
 
 
 async def heartbeat():
@@ -15,7 +16,7 @@ async def heartbeat():
 
 
 async def consume():
-    consumer.subscribe(["processed-data"])
+    consumer.subscribe([KAFKA_CONSUMER_TOPIC])
     db = next(get_db())
     while True:
         try:
